@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Studio",
   description:
     "Oblique is a sixty-four person architecture, urbanism and research practice in Zürich, Berlin and Singapore, founded in 2011.",
+  alternates: { canonical: "/studio" },
 };
 
 const people = [

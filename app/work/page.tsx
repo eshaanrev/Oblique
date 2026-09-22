@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Work",
   description:
     "Selected cultural, residential, civic and education projects by Oblique.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {

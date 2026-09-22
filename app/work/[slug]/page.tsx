@@ -17,7 +17,17 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return { title: project.title, description: project.lede };
+  return {
+    title: project.title,
+    description: project.lede,
+    alternates: { canonical: `/work/${project.slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.lede,
+      url: `/work/${project.slug}`,
+      images: [{ url: project.cover.src, alt: project.cover.alt }],
+    },
+  };
 }
 
 export default async function ProjectPage({ params }: Params) {

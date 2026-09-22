@@ -4,6 +4,8 @@ A demonstration website for a fictional architecture practice — *Oblique, arch
 
 Built as a design exercise: dark, metropolitan, photography-led, with the type and layout system derived from the photographs rather than applied over them.
 
+[View the live demonstration](https://obliquetemp.vercel.app)
+
 ![Oblique](public/images/kaskad-centre.jpg)
 
 ## Stack
@@ -18,7 +20,7 @@ Built as a design exercise: dark, metropolitan, photography-led, with the type a
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # static prerender of all routes
+npm run check    # lint, typecheck and production build
 ```
 
 ## How it's put together

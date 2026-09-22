@@ -20,11 +20,11 @@ const columns = [
     ],
   },
   {
-    title: "Elsewhere",
+    title: "Project",
     items: [
-      { label: "Instagram", href: "/contact" },
-      { label: "LinkedIn", href: "/contact" },
-      { label: "Divisare", href: "/contact" },
+      { label: "Source on GitHub", href: "https://github.com/eshaanrev/Oblique" },
+      { label: "Live demonstration", href: "https://obliquetemp.vercel.app" },
+      { label: "Photography source", href: "https://unsplash.com" },
     ],
   },
 ];
@@ -53,6 +53,8 @@ export default function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                         className="link-underline text-sm text-chalk-2 transition-colors hover:text-chalk"
                       >
                         {item.label}

@@ -14,14 +14,6 @@ export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [routeAtOpen, setRouteAtOpen] = useState(pathname);
-
-  // navigating closes the mobile drawer — adjusted during render rather than
-  // in an effect, so the drawer is never painted open on the new page
-  if (routeAtOpen !== pathname) {
-    setRouteAtOpen(pathname);
-    setOpen(false);
-  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -36,8 +28,13 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [open]);
 
@@ -69,6 +66,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 data-active={active}
+                aria-current={active ? "page" : undefined}
                 className="link-underline group flex items-baseline gap-2 text-[0.8rem] tracking-[0.1em] uppercase text-chalk-2 transition-colors hover:text-chalk"
               >
                 <span className="label text-faint">{item.n}</span>
@@ -82,6 +80,7 @@ export default function Header() {
         <button
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
+          aria-controls="mobile-navigation"
           aria-label={open ? "Close menu" : "Open menu"}
           className="relative z-50 flex h-6 w-7 flex-col justify-center gap-[6px] md:hidden"
         >
@@ -101,9 +100,11 @@ export default function Header() {
       </div>
 
       <div
+        id="mobile-navigation"
+        aria-hidden={!open}
         className={
           "fixed inset-0 -z-10 bg-void transition-opacity duration-500 md:hidden " +
-          (open ? "opacity-100" : "pointer-events-none opacity-0")
+          (open ? "visible opacity-100" : "invisible pointer-events-none opacity-0")
         }
       >
         <nav className="flex h-full flex-col justify-center px-6">
@@ -111,6 +112,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setOpen(false)}
               className="display flex items-baseline gap-4 border-b border-line py-6 text-5xl"
               style={{
                 transitionDelay: `${i * 70}ms`,

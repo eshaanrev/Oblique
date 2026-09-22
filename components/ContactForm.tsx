@@ -5,26 +5,25 @@ import { useState } from "react";
 const budgets = ["Under CHF 1m", "CHF 1m – 5m", "CHF 5m – 20m", "Over CHF 20m", "Not yet known"];
 
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [previewed, setPreviewed] = useState(false);
 
-  // No backend is wired up — swap this for a POST to your own endpoint.
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setPreviewed(true);
   }
 
-  if (sent) {
+  if (previewed) {
     return (
-      <div className="border-t border-line pt-10">
+      <div className="border-t border-line pt-10" role="status" aria-live="polite">
         <p className="display text-[clamp(1.5rem,3vw,2.4rem)]">
-          Received. <span className="text-amber">Thank you.</span>
+          Demo complete. <span className="text-amber">Nothing was sent.</span>
         </p>
         <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-muted">
-          A partner reads every enquiry personally. You will hear back within two
-          weeks, whether or not we are able to take the project on.
+          This fictional contact flow validates the form locally. Connect a form
+          service or API before using it for real enquiries.
         </p>
-        <button onClick={() => setSent(false)} className="label link-underline mt-10 text-chalk">
-          Send another
+        <button onClick={() => setPreviewed(false)} className="label link-underline mt-10 text-chalk">
+          Try again
         </button>
       </div>
     );
@@ -32,6 +31,9 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="border-t border-line pt-10">
+      <p className="mb-8 text-sm leading-relaxed text-muted">
+        Demonstration form. Your details stay in this browser and are not sent.
+      </p>
       <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
         <Field label="Name" name="name" required />
         <Field label="Email" name="email" type="email" required />
@@ -72,7 +74,7 @@ export default function ContactForm() {
         type="submit"
         className="group mt-12 inline-flex items-center gap-4 border border-line-2 px-8 py-4 text-[0.75rem] tracking-[0.16em] uppercase text-chalk transition-colors duration-500 hover:border-amber hover:bg-amber hover:text-void"
       >
-        Send enquiry
+        Test enquiry
         <span className="transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-x-1">
           →
         </span>

@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Contact",
   description: "Enquiries, offices and press contacts for Oblique.",
+  alternates: { canonical: "/contact" },
 };
 
 const offices = [
@@ -99,12 +100,9 @@ export default function ContactPage() {
                   className="flex flex-wrap items-baseline justify-between gap-3 border-b border-line py-4"
                 >
                   <span className="label">{c.label}</span>
-                  <a
-                    href={`mailto:${c.value}`}
-                    className="link-underline text-sm text-chalk-2 hover:text-chalk"
-                  >
+                  <span className="text-sm text-chalk-2">
                     {c.value}
-                  </a>
+                  </span>
                 </li>
               ))}
             </ul>

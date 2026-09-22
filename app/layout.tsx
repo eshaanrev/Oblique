@@ -25,17 +25,34 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://oblique.example"),
+  metadataBase: new URL("https://obliquetemp.vercel.app"),
   title: {
     default: "Oblique — Architecture, urbanism, research",
     template: "%s — Oblique",
   },
   description:
     "Oblique is an architecture, urbanism and research practice working on cultural, residential and civic buildings from Zürich, Berlin and Singapore.",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Oblique",
     description: "Architecture, urbanism and research. Zürich · Berlin · Singapore.",
     type: "website",
+    url: "/",
+    siteName: "Oblique",
+    images: [
+      {
+        url: "/images/kaskad-centre.jpg",
+        width: 2800,
+        height: 1870,
+        alt: "Oblique architecture practice",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Oblique",
+    description: "Architecture, urbanism and research. Zürich · Berlin · Singapore.",
+    images: ["/images/kaskad-centre.jpg"],
   },
 };
 
